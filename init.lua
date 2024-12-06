@@ -2,6 +2,7 @@ require('config.lazy')
 require('mappings')
 
 vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 vim.opt.number = true
 vim.opt.undofile = true
