@@ -1,8 +1,8 @@
-require('config.lazy')
-require('mappings')
-
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+
+require('config.lazy')
+require('mappings')
 
 vim.opt.number = true
 vim.opt.undofile = true
