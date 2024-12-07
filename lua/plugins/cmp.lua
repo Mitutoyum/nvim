@@ -57,9 +57,7 @@ return {
                 ['<C-Space>'] = cmp.mapping.complete {},
             }),
             formatting = {
-                format = lspkind.cmp_format({
-
-                })
+                format = lspkind.cmp_format({})
             }
         })
     end
