@@ -4,7 +4,7 @@ local onedark = {
     config = function()
         local onedark = require('onedark')
         onedark.setup({
-            -- style = ''
+            style = 'warmer'
         })
         onedark.load()
     end
@@ -16,12 +16,12 @@ local catppuccin = {
     priority = 1000,
     config = function()
         require('catppuccin').setup({
-            flavour = 'mocha',
+            -- flavour = ''
             transparent_background = false,
         })
         vim.cmd.colorscheme('catppuccin')
     end
-
 }
 
-return onedark
+
+return catppuccin

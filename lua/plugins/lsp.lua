@@ -5,14 +5,10 @@ return {
         'williamboman/mason-lspconfig.nvim'
     },
     config = function()
-        local lsp = { -- add more as you wish
-            'lua_ls',
-            'pyright'
-        }
-        local capabilities = require('cmp_nvim_lsp').default_capabilities()
+        local default_capabilities = require('cmp_nvim_lsp').default_capabilities()
+        local lspconfig = require('lspconfig')
 
         vim.api.nvim_create_autocmd('LspAttach', {
-            group = vim.api.nvim_create_augroup('LspConfig', {}),
             callback = function(event)
                 local builtin = require('telescope.builtin')
                 local map = function(keys, func, desc, mode)
@@ -29,26 +25,18 @@ return {
             end
         })
 
-        require('mason').setup()
         require('mason-lspconfig').setup({
-            ensure_installed = lsp
+            handlers = {
+                function(ls)
+                    local opts = vim.g.mason_packages.opt[ls] or {}
+
+                    if not opts.capabilities then
+                        opts.capabilities = default_capabilities
+                    end
+
+                    lspconfig[ls].setup(opts)
+                end
+            }
         })
-
-
-        local lspconfig = require('lspconfig')
-        for _, ls in ipairs(lsp) do
-            local opts = {capabilities = capabilities}
-            if ls == 'lua_ls' then
-                opts['settings'] = {
-                    Lua = {
-                        diagnostics = {
-                            globals = { 'vim' }
-                        }
-                    }
-                }
-            end
-
-            lspconfig[ls].setup(opts)
-        end
     end
 }
