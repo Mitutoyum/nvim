@@ -1,19 +1,31 @@
 return {
 	"stevearc/conform.nvim",
-	event = { "BufReadPre", "BufNewFile" },
+	event = { "BufReadPre" },
 	config = function()
-		require("conform").setup({
-			formatters_by_ft = vim.g.mason_packages.fmt,
+		local conform = require("conform")
+
+		conform.setup({
+			formatters_by_ft = {
+				lua = { "stylua" },
+				python = function(bufnr)
+					if conform.get_formatter_info("ruff_format", bufnr).available then
+						return { "ruff_format" }
+					else
+						return { "isort", "black" }
+					end
+				end,
+			},
+
 			format_on_save = {
-				-- timeout_ms = 500,
 				lsp_format = "fallback",
 			},
-			vim.keymap.set("n", "<leader>f", function()
+
+			vim.keymap.set({ "n", "v" }, "mp", function()
 				require("conform").format({
-					async = true,
 					lsp_format = "fallback",
+					async = true,
 				})
-			end, { desc = "[F]ormat Buffer" }),
+			end, { desc = "[M]ake [P]retty" }),
 		})
 	end,
 }

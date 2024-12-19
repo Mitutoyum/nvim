@@ -1,51 +1,25 @@
 return {
-    'williamboman/mason.nvim',
-    dependencies = {
-        'WhoIsSethDaniel/mason-tool-installer.nvim'
-    },
-    config = function()
-        require('mason').setup()
+	"williamboman/mason.nvim",
+	dependencies = {
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+	},
+	config = function()
+		local packages = {
+			-- lsp
+			"lua_ls",
+			"pyright",
+			"clangd",
 
-        local packages = {
-            ls = {
-                'lua_ls',
-                'pyright',
-            },
+			-- formatters
+			"stylua",
+			"ruff",
+			"isort",
+			"black",
+		}
 
-            fmt = {
-                lua = {'stylua'},
-                python = {'isort', 'black'}
-            },
-
-            opt = {
-                lua_ls = {
-                    settings = {
-                        Lua = {
-                            diagnostics = {
-                                globals = {'vim'}
-                            }
-                        }
-                    }
-                }
-            }
-
-        }
-
-        vim.g.mason_packages = packages
-
-        -- merge them into a single table for installation
-
-        local merge = {}
-
-        table.move(packages.ls, 1, #packages.ls, #merge + 1, merge)
-
-        for ft, fmt in pairs(packages.fmt) do
-            table.move(fmt, 1, #fmt, #merge + 1, merge)
-        end
-
-        require('mason-tool-installer').setup({
-            ensure_installed = merge
-        })
-
-    end
+		require("mason").setup()
+		require("mason-tool-installer").setup({
+			ensure_installed = packages,
+		})
+	end,
 }

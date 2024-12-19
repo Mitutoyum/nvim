@@ -1,6 +1,6 @@
 return {
-    'echasnovski/mini.nvim',
-    config = function()
-        require('mini.comment').setup()
-    end
+	"echasnovski/mini.nvim",
+	config = function()
+		require("mini.comment").setup()
+	end,
 }

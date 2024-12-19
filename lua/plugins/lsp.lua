@@ -1,42 +1,56 @@
 return {
-    'neovim/nvim-lspconfig',
-    dependencies = {
-        'williamboman/mason.nvim',
-        'williamboman/mason-lspconfig.nvim'
-    },
-    config = function()
-        local default_capabilities = require('cmp_nvim_lsp').default_capabilities()
-        local lspconfig = require('lspconfig')
+	"neovim/nvim-lspconfig",
+	dependencies = {
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+	},
+	config = function()
+		local default_capabilities = require("cmp_nvim_lsp").default_capabilities()
+		local lspconfig = require("lspconfig")
 
-        vim.api.nvim_create_autocmd('LspAttach', {
-            callback = function(event)
-                local builtin = require('telescope.builtin')
-                local map = function(keys, func, desc, mode)
-                    mode = mode or 'n'
-                    vim.keymap.set(mode, keys, func, {desc = desc, buffer = event.buffer})
-                end
+		local opts = {
+			lua_ls = {
+				settings = {
+					Lua = {
+						diagnostics = {
+							globals = { "vim" },
+						},
+					},
+				},
+			},
+		}
 
-                map('gd', builtin.lsp_definitions, '[G]oto [D]efinition')
-                map('gr', builtin.lsp_references, '[G]oto [R]eference')
-                map('gi', builtin.lsp_implementations, '[G]oto [I]mplementation')
-                map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+		vim.api.nvim_create_autocmd("LspAttach", {
+			callback = function(event)
+				local builtin = require("telescope.builtin")
+				local map = function(keys, func, desc, mode)
+					mode = mode or "n"
+					vim.keymap.set(mode, keys, func, { desc = desc, buffer = event.buffer })
+				end
 
-                map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-            end
-        })
+				map("gd", builtin.lsp_definitions, "[G]oto [D]efinition")
+				map("gr", builtin.lsp_references, "[G]oto [R]eference")
+				map("gi", builtin.lsp_implementations, "[G]oto [I]mplementation")
+				map("gtd", builtin.lsp_type_definitions, "[G]oto [T]ype [D]efinition")
+				map("gD", vim.lsp.buf.definition, "[G]oto [D]eclaration")
 
-        require('mason-lspconfig').setup({
-            handlers = {
-                function(ls)
-                    local opts = vim.g.mason_packages.opt[ls] or {}
+				map("ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+				map("rn", vim.lsp.buf.rename, "[R]e[n]ame")
+			end,
+		})
 
-                    if not opts.capabilities then
-                        opts.capabilities = default_capabilities
-                    end
+		require("mason-lspconfig").setup({
+			handlers = {
+				function(ls)
+					local opt = opts[ls] or {}
 
-                    lspconfig[ls].setup(opts)
-                end
-            }
-        })
-    end
+					if not opt.capabilities then
+						opt.capabilities = default_capabilities
+					end
+
+					lspconfig[ls].setup(opt)
+				end,
+			},
+		})
+	end,
 }
