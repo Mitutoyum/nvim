@@ -13,8 +13,8 @@ map("n", "<C-Left>", "<cmd>vertical resize -2<CR>", { desc = "Decrease window wi
 map("n", "<C-Right>", "<cmd>vertical resize +2<CR>", { desc = "Increase window width" })
 
 -- Navigate block
-map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selected block down" })
-map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selected block up" })
+map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selected block down" })
+map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selected block up" })
 
 -- Indent
 map("n", ">", ">>", { desc = "Indent right" })

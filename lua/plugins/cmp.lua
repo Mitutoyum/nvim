@@ -15,12 +15,13 @@ return {
 		local lspkind = require("lspkind")
 
 		cmp.setup({
-			window = {
-				completion = cmp.config.window.bordered(),
-				documentation = cmp.config.window.bordered(),
-			},
+			-- comment this if you want rounded ui
+			-- window = {
+			-- 	completion = cmp.config.window.bordered(),
+			-- 	documentation = cmp.config.window.bordered(),
+			-- },
 
-			enabled = function()
+			enabled = function() -- Dont complete comments
 				local context = require("cmp.config.context")
 				if vim.api.nvim_get_mode().mode == "c" then
 					return true

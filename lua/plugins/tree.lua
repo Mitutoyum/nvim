@@ -17,9 +17,9 @@ local nvimtree = {
 				dotfiles = false,
 			},
 
-			renderer = {
-				root_folder_label = ":t",
-			},
+			-- renderer = {
+			-- 	root_folder_label = ":t",
+			-- },
 		})
 
 		local map = function(keys, func, desc, mode)

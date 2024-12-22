@@ -3,8 +3,8 @@ return {
 	dependencies = {
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
-	config = function()
-		local packages = {
+	opts = {
+		ensure_installed = {
 			-- lsp
 			"lua_ls",
 			"pyright",
@@ -15,11 +15,15 @@ return {
 			"ruff",
 			"isort",
 			"black",
-		}
 
+			-- linters
+			"pylint",
+		},
+	},
+	config = function(_, opts)
 		require("mason").setup()
 		require("mason-tool-installer").setup({
-			ensure_installed = packages,
+			ensure_installed = opts.ensure_installed,
 		})
 	end,
 }
