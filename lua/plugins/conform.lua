@@ -11,6 +11,7 @@ return {
 			desc = "[M]ake [P]retty",
 		},
 	},
+
 	---@module "conform"
 	---@type conform.setupOpts
 	opts = {
@@ -23,6 +24,8 @@ return {
 					return { "isort", "black" }
 				end
 			end,
+
+			cpp = { "clang-format" },
 		},
 
 		format_on_save = {

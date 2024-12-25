@@ -13,6 +13,7 @@ return {
 						highlight = "Directory",
 					},
 				},
+				diagnostics = "nvim_lsp",
 			},
 		})
 	end,

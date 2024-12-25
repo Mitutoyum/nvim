@@ -15,6 +15,7 @@ return {
 			"ruff",
 			"isort",
 			"black",
+			"clang-format",
 
 			-- linters
 			"pylint",

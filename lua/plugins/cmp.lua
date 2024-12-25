@@ -4,8 +4,14 @@ return {
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-nvim-lua",
+		"hrsh7th/cmp-path",
+		"hrsh7th/cmp-cmdline",
 		"hrsh7th/cmp-buffer",
+		"hrsh7th/cmp-emoji",
 
+		"andersevenrud/cmp-tmux",
+		"chrisgrieser/cmp-nerdfont",
+		"ray-x/cmp-treesitter",
 		"saadparwaiz1/cmp_luasnip",
 
 		"onsails/lspkind.nvim", -- for icons
@@ -15,7 +21,8 @@ return {
 		local lspkind = require("lspkind")
 
 		cmp.setup({
-			-- comment this if you want rounded ui
+			-- uncomment this if you want rounded ui
+			-- it may look bad on some colorscheme
 			-- window = {
 			-- 	completion = cmp.config.window.bordered(),
 			-- 	documentation = cmp.config.window.bordered(),
@@ -37,18 +44,24 @@ return {
 			},
 
 			sources = cmp.config.sources({
+				{ name = "lazydev" },
 				{ name = "nvim_lsp" },
 				{ name = "nvim_lua" },
 				{ name = "luasnip" },
 				{ name = "buffer" },
+				{ name = "path" },
+				{ name = "treesitter" },
+				{ name = "emoji" },
+				{ name = "nerdfont" },
+				{ name = "tmux" },
 			}),
 
 			mapping = cmp.mapping.preset.insert({
 				["<C-n>"] = cmp.mapping.select_next_item(),
 				["<C-p>"] = cmp.mapping.select_prev_item(),
 
-				["<C-b>"] = cmp.mapping.scroll_docs(-4),
-				["<C-f>"] = cmp.mapping.scroll_docs(4),
+				["<C-f>"] = cmp.mapping.scroll_docs(4), -- scroll down
+				["<C-b>"] = cmp.mapping.scroll_docs(-4), -- scroll up
 
 				["<C-y>"] = cmp.mapping.confirm({ select = true }),
 
@@ -74,6 +87,28 @@ return {
 			formatting = {
 				format = lspkind.cmp_format({}),
 			},
+
+			experimental = {
+				ghost_text = true,
+			},
 		})
+
+		cmp.setup.cmdline({ "/", "?" }, {
+			mapping = cmp.mapping.preset.cmdline(),
+			sources = {
+				{ name = "buffer" },
+			},
+		})
+
+		-- noice.nvim already does this for us.
+		-- cmp.setup.cmdline(":", {
+		-- 	mapping = cmp.mapping.preset.cmdline(),
+		-- 	sources = cmp.config.sources({
+		-- 		{ name = "path" },
+		-- 	}, {
+		-- 		{ name = "cmdline" },
+		-- 	}),
+		-- 	matching = { disallow_symbol_nonprefix_matching = false },
+		-- })
 	end,
 }

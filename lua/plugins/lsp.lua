@@ -34,6 +34,7 @@ return {
 				map("gtd", builtin.lsp_type_definitions, "[G]oto [T]ype [D]efinition")
 				map("gD", vim.lsp.buf.definition, "[G]oto [D]eclaration")
 
+				map("K", vim.lsp.buf.hover, "Hover")
 				map("ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 				map("rn", vim.lsp.buf.rename, "[R]e[n]ame")
 			end,
