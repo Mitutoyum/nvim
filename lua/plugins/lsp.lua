@@ -9,15 +9,15 @@ return {
 		local lspconfig = require("lspconfig")
 
 		local opts = {
-			lua_ls = {
-				settings = {
-					Lua = {
-						diagnostics = {
-							globals = { "vim" },
-						},
-					},
-				},
-			},
+			-- lua_ls = {
+			-- 	settings = {
+			-- 		Lua = {
+			-- 			diagnostics = {
+			-- 				globals = { "vim" },
+			-- 			},
+			-- 		},
+			-- 	},
+			-- },
 		}
 
 		vim.api.nvim_create_autocmd("LspAttach", {
@@ -31,7 +31,7 @@ return {
 				map("gd", builtin.lsp_definitions, "[G]oto [D]efinition")
 				map("gr", builtin.lsp_references, "[G]oto [R]eference")
 				map("gi", builtin.lsp_implementations, "[G]oto [I]mplementation")
-				map("gtd", builtin.lsp_type_definitions, "[G]oto [T]ype [D]efinition")
+				map("td", builtin.lsp_type_definitions, "[T]ype [D]efinition")
 				map("gD", vim.lsp.buf.definition, "[G]oto [D]eclaration")
 
 				map("K", vim.lsp.buf.hover, "Hover")
