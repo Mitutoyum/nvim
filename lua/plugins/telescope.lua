@@ -6,6 +6,9 @@ return {
 	},
 	config = function()
 		local telescope = require("telescope")
+		local builtin = require("telescope.builtin")
+		local map = vim.keymap.set
+
 		telescope.setup({
 			extensions = {
 				["ui-select"] = {
@@ -15,8 +18,6 @@ return {
 		})
 		telescope.load_extension("ui-select")
 
-		local map = vim.keymap.set
-		local builtin = require("telescope.builtin")
 		map("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
 		map("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" }) -- needs ripgrep
 		map("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
