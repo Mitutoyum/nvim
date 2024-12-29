@@ -19,8 +19,8 @@ return {
 	config = function()
 		local cmp = require("cmp")
 		local lspkind = require("lspkind")
-
 		cmp.setup({
+
 			-- uncomment this if you want rounded ui
 			-- it may look bad on some colorscheme
 			-- window = {

@@ -20,6 +20,3 @@ vim.opt.mouse = "a"
 vim.opt.ignorecase = true
 vim.opt.undofile = true
 vim.opt.confirm = true
-
-vim.g.loaded_netrwPlugin = 1
-vim.g.loaded_netrw = 1

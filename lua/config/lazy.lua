@@ -16,7 +16,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	spec = {
-		-- { "LazyVim/LazyVim", import = "lazyvim.plugins" },
 		{ import = "plugins" },
 	},
 	defaults = {
@@ -33,13 +32,16 @@ require("lazy").setup({
 		notify = true, -- notify on update
 	},
 	performance = {
+		cache = {
+			enabled = true,
+		},
 		rtp = {
 			-- disable some rtp plugins
 			disabled_plugins = {
 				"gzip",
-				-- "matchit",
-				-- "matchparen",
-				-- "netrwPlugin",
+				"matchit",
+				"matchparen",
+				"netrwPlugin",
 				"tarPlugin",
 				"tohtml",
 				"tutor",

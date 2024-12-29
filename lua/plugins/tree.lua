@@ -8,6 +8,7 @@ local nvimtree = {
 	config = function()
 		local tree = require("nvim-tree")
 		local api = require("nvim-tree.api")
+
 		tree.setup({
 			disable_netrw = true,
 
@@ -16,10 +17,6 @@ local nvimtree = {
 			filters = {
 				dotfiles = false,
 			},
-
-			-- renderer = {
-			-- 	root_folder_label = ":t",
-			-- },
 		})
 
 		local map = function(keys, func, desc, mode)
@@ -39,7 +36,20 @@ local neotree = {
 		"MunifTanjim/nui.nvim",
 		-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 	},
-	config = function()
+	opts = {
+		popup_border_style = "rounded",
+		source_selector = {
+			winbar = true,
+		},
+		filesystem = {
+			filtered_items = {
+				hide_dotfiles = false,
+				hide_gitignored = false,
+				hide_hidden = false,
+			},
+		},
+	},
+	config = function(_, opts)
 		local map = function(keys, func, desc, mode)
 			mode = mode or "n"
 			vim.keymap.set(mode, keys, func, { desc = desc })
@@ -48,19 +58,7 @@ local neotree = {
 		local neotree = require("neo-tree")
 		local command = require("neo-tree.command")
 
-		neotree.setup({
-			popup_border_style = "rounded",
-			source_selector = {
-				winbar = true,
-			},
-			filesystem = {
-				filtered_items = {
-					hide_dotfiles = false,
-					hide_gitignored = false,
-					hide_hidden = false,
-				},
-			},
-		})
+		neotree.setup(opts)
 
 		map("<leader>fe", function()
 			command.execute({ toggle = true })

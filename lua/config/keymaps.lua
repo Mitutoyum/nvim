@@ -34,3 +34,6 @@ map("n", "<leader>y", '"+yy', { desc = "Yank to clipboard" })
 map("v", "<leader>y", '"+y', { desc = "Yank to clipboard" })
 
 map({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from clipboard" })
+
+-- map("n", "tn", "gt", { remap = true, desc = "Next Tab" })
+-- map("n", "tp", "gT", { remap = true, desc = "Previous Tab" })
