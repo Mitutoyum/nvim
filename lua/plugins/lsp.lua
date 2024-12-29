@@ -9,6 +9,9 @@ return {
 		local lspconfig = require("lspconfig")
 
 		local opts = {
+			-- add lsp options here
+			-- example:
+
 			-- lua_ls = {
 			-- 	settings = {
 			-- 		Lua = {
@@ -34,7 +37,8 @@ return {
 				map("td", builtin.lsp_type_definitions, "[T]ype [D]efinition")
 				map("gD", vim.lsp.buf.definition, "[G]oto [D]eclaration")
 
-				map("K", vim.lsp.buf.hover, "Hover")
+				-- map("K", vim.lsp.buf.hover, "Hover") they have this built in idk why
+
 				map("ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 				map("rn", vim.lsp.buf.rename, "[R]e[n]ame")
 			end,
